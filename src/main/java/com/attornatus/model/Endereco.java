@@ -34,7 +34,7 @@ public class Endereco implements Serializable {
 	private String cidade;
 	@Column(nullable = true)
 	private Boolean principal;
-	
+
 	public Long getId() {
 		return id;
 	}

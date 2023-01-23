@@ -15,38 +15,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.attornatus.datasource.model.Pessoa;
-import com.attornatus.repository.PessoaRepository;
+import com.attornatus.model.Pessoa;
+import com.attornatus.service.AdicionarNovaPessoaServiceImp;
+import com.attornatus.service.AtualizarPessoaServiceImp;
+import com.attornatus.service.BuscarPessoaPorIdServiceImp;
+import com.attornatus.service.ListarPessoasServiceImp;
 
 @RestController
 @RequestMapping("/pessoas")
 public class PessoaController {
 	
 	@Autowired
-	private PessoaRepository pessoaRepository;
+	private ListarPessoasServiceImp listarPessoasServiceImp;
+	@Autowired
+	private BuscarPessoaPorIdServiceImp buscarPessoaPorIdServiceImp;
+	@Autowired
+	private AdicionarNovaPessoaServiceImp adicionarNovaPessoaServiceImp;
+	@Autowired
+	private AtualizarPessoaServiceImp atualizarPessoaServiceImp;
 
 	@GetMapping(path = "/listar")
 	public List<Pessoa> listarPessoas() {
-		return pessoaRepository.findAll();
+		return listarPessoasServiceImp.listarPessoas();
 	}
 	
 	@GetMapping(path = "/id/{id}")
 	public ResponseEntity<Optional<Pessoa>> buscarPessoaPorId(@PathVariable(name = "id", required = true) Long id_pessoa) {
-		return ResponseEntity.ok(pessoaRepository.findById(id_pessoa));
+		return ResponseEntity.ok(buscarPessoaPorIdServiceImp.buscarPessoaPorId(id_pessoa));
 	}
 	
-	@PostMapping
+	@PostMapping(path = "/adicionar")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void adicionarPessoa(@RequestBody Pessoa pessoa) {
-		pessoaRepository.save(pessoa);
+		adicionarNovaPessoaServiceImp.adicionarPessoa(pessoa);
 	}
 	
 	@PutMapping(path = "/atualizar/{nome}")
 	public void atualizarPessoa(@PathVariable(name = "nome", required = true) String nome_pessoa, @RequestBody Pessoa pessoa) {
-		Pessoa novaPessoa = pessoaRepository.findByNome(nome_pessoa);
-		novaPessoa.setNome(pessoa.getNome());
-		novaPessoa.setData_nascimento(pessoa.getData_nascimento());
-		pessoaRepository.save(novaPessoa);
+		atualizarPessoaServiceImp.atualizarPessoa(nome_pessoa, pessoa);
 	}
 
 }

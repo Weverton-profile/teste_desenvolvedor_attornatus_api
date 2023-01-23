@@ -15,7 +15,7 @@ public class AtualizarPessoaServiceImp {
 	public void atualizarPessoa(String nome_pessoa,Pessoa pessoa) {
 		Pessoa novaPessoa = pessoaRepository.findByNome(nome_pessoa);
 		System.out.println(novaPessoa.getEnderecos().get(0).getId());
-		if (novaPessoa != null ) {
+		if (novaPessoa.getNome() != null ) {
 			novaPessoa.setNome(pessoa.getNome());
 			novaPessoa.setData_nascimento(pessoa.getData_nascimento());
 		}

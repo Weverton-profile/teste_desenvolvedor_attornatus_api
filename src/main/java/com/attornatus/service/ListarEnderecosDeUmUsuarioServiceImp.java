@@ -15,7 +15,7 @@ public class ListarEnderecosDeUmUsuarioServiceImp {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 	
-	public List<Endereco> listarEnderecoPessoa(String nome_pessoa, Pessoa pessoa) {
+	public List<Endereco> listarEnderecoPessoa(String nome_pessoa) {
 		Pessoa novaPessoa = pessoaRepository.findByNome(nome_pessoa);
 		List<Endereco> enderecos = novaPessoa.getEnderecos();
 		return enderecos;

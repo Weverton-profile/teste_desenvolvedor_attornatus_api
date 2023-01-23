@@ -15,7 +15,7 @@ public class BuscarEnderecoPrincipalServiceImp {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 	
-	public List<Endereco> buscarEnderecoPrincipal(String nome_pessoa,Pessoa pessoa) {
+	public List<Endereco> buscarEnderecoPrincipal(String nome_pessoa) {
 		Pessoa novaPessoa = pessoaRepository.findByNome(nome_pessoa);
 		List<Endereco> enderecos = novaPessoa.getEnderecos();
 		List<Endereco> endereco_p = new ArrayList<>();

@@ -28,6 +28,14 @@ public class Pessoa implements Serializable {
 	@OneToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
 	private List<Endereco> enderecos;
 	
+	public Pessoa() {
+	}
+
+	public Pessoa(String nome, String data_nascimento) {
+		this.nome = nome;
+		this.data_nascimento = data_nascimento;
+	}
+	
 	public Long getId() {
 		return id;
 	}

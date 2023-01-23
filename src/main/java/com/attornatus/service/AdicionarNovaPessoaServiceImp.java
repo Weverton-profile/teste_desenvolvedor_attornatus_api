@@ -13,6 +13,8 @@ public class AdicionarNovaPessoaServiceImp {
 	private PessoaRepository pessoaRepository;
 	
 	public void adicionarPessoa(Pessoa pessoa) {
-		pessoaRepository.save(pessoa);
+		if (pessoa.getNome() != null) {
+			pessoaRepository.save(pessoa);
+		}
 	}
 }

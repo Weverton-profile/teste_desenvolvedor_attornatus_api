@@ -21,7 +21,7 @@ public class AdicionarNovaPessoaServiceImpTest {
 	
 	@Test
 	public void adicionarNovaPessoaTest() {
-		Pessoa pessoaAdicionada = new Pessoa("Weverton", "23/05/1997", null);
+		Pessoa pessoaAdicionada = new Pessoa("Weverton", "23/05/1997");
 		serviceImp.adicionarPessoa(pessoaAdicionada);
 		Pessoa pessoaTest = pessoaRepository.findByNome("Weverton");
 		assertEquals(pessoaTest.getData_nascimento(), pessoaTest.getData_nascimento());
